@@ -27,7 +27,11 @@ function ScopeCanonicalizer() {
       rememberWorkspaceId(named)
       return
     }
-    router.replace(scopedUrl(`${window.location.pathname}${window.location.search}${window.location.hash}`))
+    const current = `${window.location.pathname}${window.location.search}${window.location.hash}`
+    const next = scopedUrl(current)
+    // General workspace adds no parameter; replacing with the same URL would
+    // re-run this effect on every RSC response and spin the page forever.
+    if (next !== current) router.replace(next)
   }, [named, pathname, router])
   useEffect(() => {
     const remembered = activeWorkspaceId()
@@ -36,8 +40,9 @@ function ScopeCanonicalizer() {
     listWorkspaces()
       .then(rows => {
         if (!alive || rows.some(row => row.workspace_id === remembered && row.kind === 'workspace')) return
+        const segment = window.location.pathname.split('/')[1]
         rememberWorkspaceId('')
-        void selectWorkspace('', `/${window.location.pathname.split('/')[1] || 'chat'}`)
+        void selectWorkspace('', segment ? `/${segment}` : '/')
       })
       .catch(() => undefined)
     return () => { alive = false }
