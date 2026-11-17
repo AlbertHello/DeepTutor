@@ -1,10 +1,6 @@
-import { redirect } from "next/navigation";
+import ChatWorkspace from "@/features/chat/components/ChatWorkspace";
 
-/**
- * The workspace root has one destination; sessions live under `/chat`.
- * `next.config.js` redirects `/` before routing, so this page is only a
- * fallback — it stays so links to `/` still resolve to a real page.
- */
+/** Root renders the chat surface directly; sessions stay under `/chat`. */
 export default function WorkspaceRootPage() {
-  redirect("/chat");
+  return <ChatWorkspace />;
 }

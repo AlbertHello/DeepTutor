@@ -41,7 +41,7 @@ function WorkspaceRow({ row, run, busy }: { row: ChatWorkspaceRegistration; run:
         {row.archived && <span className="text-xs text-[var(--muted-foreground)]">{t('Archived')}</span>}
         <div className="flex max-w-full flex-wrap items-center gap-0.5 sm:opacity-0 sm:transition-opacity sm:group-hover:opacity-100 sm:group-focus-within:opacity-100">
           {row.kind !== 'system' && !row.archived && row.status === 'ready' && !busy && (
-            <Link className={actionClass} href={row.kind === 'general' ? '/chat?dt_workspace=' : workspaceChatHref(row.workspace_id)}>
+            <Link className={actionClass} href={row.kind === 'general' ? '/' : workspaceChatHref(row.workspace_id)}>
               <Plus size={14} />{t('New chat')}
             </Link>
           )}

@@ -912,12 +912,12 @@ export default function ChatWorkspace() {
   );
   const startNewChat = useCallback(() => {
     newSession({ workspaceId: state.workspaceId });
-    navigateTask("/chat", router.push);
+    navigateTask("/", router.push);
   }, [newSession, router, state.workspaceId]);
   const handleSessionDeleted = useCallback(() => {
     cancelStreamingTurn();
     newSession({ workspaceId: state.workspaceId });
-    navigateTask("/chat", router.push);
+    navigateTask("/", router.push);
   }, [cancelStreamingTurn, newSession, router, state.workspaceId]);
 
   // What a side chat opened from the viewer is about: this

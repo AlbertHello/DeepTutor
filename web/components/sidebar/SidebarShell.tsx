@@ -343,7 +343,7 @@ export function SidebarShell({
         {footerOverride ? footerOverride(true) : (
           <div className="dt-rail-foot">
             <Tooltip label={t("navigation.newChat")} side="right" shortcut={SHORTCUTS.newChat}>
-              <Link prefetch={false} href="/chat" onClick={handleHomeClick} aria-label={t("navigation.newChat")} className="dt-nav-icon">
+              <Link prefetch={false} href="/" onClick={handleHomeClick} aria-label={t("navigation.newChat")} className="dt-nav-icon">
                 <SquarePen size={17} strokeWidth={1.6} />
               </Link>
             </Tooltip>
@@ -434,7 +434,7 @@ export function SidebarShell({
       {footerOverride ? footerOverride(false) : (
         <div className="dt-sidebar-footer">
           <Tooltip label={t("navigation.newChat")} side="top" shortcut={SHORTCUTS.newChat} as="div" className="block w-full">
-            <Link prefetch={false} href="/chat" onClick={handleHomeClick} className="dt-new-conversation">
+            <Link prefetch={false} href="/" onClick={handleHomeClick} className="dt-new-conversation">
               <SquarePen size={16} strokeWidth={1.7} />
               <span>{t("navigation.newChat")}</span>
             </Link>

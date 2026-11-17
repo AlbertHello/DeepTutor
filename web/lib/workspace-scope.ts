@@ -51,8 +51,9 @@ export function scopedUrl(path: string, workspaceId = activeWorkspaceId()): stri
   if (!path.startsWith('/') && !absolute) return path
   const url = new URL(path, origin)
   if (url.origin !== origin) return path
-  if (!url.searchParams.has('dt_workspace'))
-    url.searchParams.set('dt_workspace', url.searchParams.get('workspace') ?? workspaceId)
+  const scope = url.searchParams.get('workspace') ?? workspaceId
+  if (!url.searchParams.has('dt_workspace') && scope)
+    url.searchParams.set('dt_workspace', scope)
   return absolute ? url.toString() : `${url.pathname}${url.search}${url.hash}`
 }
 
@@ -85,6 +86,7 @@ export async function selectWorkspace(
     return
   }
   if (version !== navigationVersion) return
+  rememberWorkspaceId(workspaceId)
   // Next owns navigation. The workspace layout resets only scoped runtimes;
   // the document, account settings and loaded assets stay in place.
   const url = new URL(scopedUrl(destination, workspaceId), window.location.origin)
